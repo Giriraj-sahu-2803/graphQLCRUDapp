@@ -77,14 +77,16 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(BookType),
       async resolve(parents, args) {
         const books = await Book.find();
-        return books;
+        const returningBooks=books.map((res)=>{return {...res._doc,id:res._id.toString()}});
+        return returningBooks;
       },
     },
     authors: {
       type: new GraphQLList(AuthorType),
       async resolve() {
         const authors = await Author.find();
-        return authors;
+        const returningAuthors=authors.map((res)=>{return {...res._doc,id:res._id.toString()}})
+        return returningAuthors;
       },
     },
   }),
