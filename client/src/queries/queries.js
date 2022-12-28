@@ -17,15 +17,14 @@ const GET_AUTHORS_QUERY = gql`
     }
   }
 `;
-const ADD_BOOK_MUTATION=(name,genre,author)=>{
-  return  gql`
-  mutation{
-      addBook(name:name,genre:genre,author:author){
+const ADD_BOOK_MUTATION= gql`
+  mutation ($name:String!,$genre:String!,$author:ID){
+      addBook(name:$name,genre:$genre,authorId:$author){
         name
         id
       }
   }
   ` 
-}
+
 
 export { GET_BOOKS_QUERY, GET_AUTHORS_QUERY,ADD_BOOK_MUTATION };
